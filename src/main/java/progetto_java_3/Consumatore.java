@@ -10,7 +10,7 @@ class Consumatore extends Thread {
         running = true;
     }
 
-    public void arresta() {
+    public synchronized void arresta() {
         running = false;
     }
 
@@ -18,9 +18,9 @@ class Consumatore extends Thread {
         String name = Thread.currentThread().getName();
         try {
             while (running) {
+                this.sleep(1000);
                 int val = r.consuma();
-                System.out.println(name + " consuma:  " + val);
-                Thread.sleep(1000);
+                //System.out.println(name + " consuma:  " + val);
             }
             System.out.println("Fine thread " + name);
         } catch (InterruptedException e) {

@@ -13,6 +13,7 @@ class Risorsa {
     public synchronized void produci(int val) {
         try {
             while(!prodD){
+                System.out.println("prod attende");
                 wait();
             }
         } catch (Exception e) {}
@@ -25,17 +26,29 @@ class Risorsa {
     public synchronized int consuma() {
         try {
             while(!consD){
+                System.out.println("cons attende");
                 wait();
             }
         } catch (Exception e) {}
-        consD = false;
+        System.out.println(Thread.currentThread().getName() + " consuma:  " + val);
         prodD = true;
+        consD = false;
         notifyAll();
         return this.val;
     }
 
     public boolean isProdD() {
         return prodD;
+    }
+
+    
+
+    public void setProdD(boolean prodD) {
+        this.prodD = prodD;
+    }
+
+    public void setConsD(boolean consD) {
+        this.consD = consD;
     }
 
     public boolean isConsD() {

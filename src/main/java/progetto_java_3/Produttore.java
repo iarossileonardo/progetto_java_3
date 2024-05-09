@@ -10,8 +10,10 @@ class Produttore extends Thread {
         running = true;
     }
 
-    public void arresta() {
+    public synchronized void arresta() {
         this.running = false;
+        r.setProdD(true);
+        notifyAll();
     }
 
     public void run() {
@@ -19,8 +21,8 @@ class Produttore extends Thread {
         try {
             while (running) {
                 int val = (int) (Math.random() * 100 + 1);
-                System.out.println(name + " produce:  " + val);
                 r.produci(val);
+                System.out.println(name + " produce:  " + val);
             }
             System.out.println("Fine thread " + name);
         } catch (Exception e) {
