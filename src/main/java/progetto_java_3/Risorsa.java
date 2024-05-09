@@ -13,7 +13,6 @@ class Risorsa {
     public synchronized void produci(int val) {
         try {
             while(!prodD){
-                System.out.println("prod attende");
                 wait();
             }
         } catch (Exception e) {}

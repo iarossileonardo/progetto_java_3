@@ -10,6 +10,7 @@ public class Main {
         // Aspetto 5 secondi poi termino i thread
         try {
             Thread.sleep(5000);
+            System.out.println("TEMPO FINITO");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
